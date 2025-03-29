@@ -6,6 +6,7 @@ import {
 
 function UserProfile() {
   const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'));
   const [firstName, setFirstName] = useState(userDetails.first_name);
   const [lastName, setLastName] = useState(userDetails.last_name);
@@ -23,16 +24,16 @@ function UserProfile() {
   };
 
   return (
-    <Paper sx={{ padding: 4, maxWidth: 600, margin: 'auto', marginTop: '100px', textAlign: 'center' }}>
+    <Paper sx={{ padding: 4, maxWidth: 600, margin: 'auto', marginTop: '100px', textAlign: 'center', boxShadow: 3, borderRadius: 2 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 3 }}>
-        <Avatar sx={{ width: 100, height: 100, marginBottom: 2 }} src={userDetails.avatar} alt={userDetails.first_name} />
-        <Typography variant="h4">{`${firstName} ${lastName}`}</Typography>
+        <Avatar sx={{ width: 100, height: 100, marginBottom: 2, boxShadow: 2 }} src={userDetails.avatar} alt={userDetails.first_name} />
+        <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>{`${firstName} ${lastName}`}</Typography>
         <Typography variant="body1" sx={{ color: 'text.secondary', mb: 2 }}>{email}</Typography>
       </Box>
       <Divider sx={{ mb: 3 }} />
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-        <Button variant="contained" onClick={() => setOpen(true)} sx={{ mb: 2 }}>Edit Profile</Button>
-        <Button variant="outlined" color="error" onClick={handleDeleteAccount}>Delete Account</Button>
+        <Button variant="contained" onClick={() => setOpen(true)} sx={{ mb: 2, width: '150px', height: '40px' }}>Edit Profile</Button>
+        <Button variant="outlined" color="error" onClick={() => setConfirmOpen(true)} sx={{ width: '200px', height: '40px' }}>Delete Account</Button>
       </Box>
 
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -63,6 +64,17 @@ function UserProfile() {
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button variant="contained" onClick={handleEdit}>Save</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
+        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete your account? This action cannot be undone.</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
+          <Button variant="contained" color="error" onClick={handleDeleteAccount}>Delete</Button>
         </DialogActions>
       </Dialog>
     </Paper>
