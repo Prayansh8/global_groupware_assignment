@@ -56,7 +56,7 @@ function UserList() {
         <CircularProgress />
       ) : (
         <>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{margin: 'auto', width: '100%'}}>
             {users.map(user => (
               <Grid item xs={12} sm={6} md={4} key={user.id}>
                 <UserCard user={user} onEdit={handleEdit} onDelete={handleDelete} />
