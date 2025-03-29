@@ -1,4 +1,11 @@
+[build]
+  # Directory to change into before starting a build.
+  publish = "build"
+  # Command to execute during build.
+  command = "npm run build"
+
 [[redirects]]
+  # Redirect all requests to index.html
   from = "/*"
   to = "/index.html"
   status = 200
