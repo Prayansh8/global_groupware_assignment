@@ -34,7 +34,7 @@ function App() {
           )}
         </Toolbar>
       </AppBar>
-      <Container maxWidth="lg" sx={{ marginTop: '4vh', marginX: '1vh' }}>
+      <Container maxWidth="lg" sx={{ marginTop: '4vh'}}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={token ? <UserList /> : <Navigate to="/login" replace />} />
